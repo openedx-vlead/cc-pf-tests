@@ -1,0 +1,121 @@
+#+TITLE: Scripts for calculating Performance of the College Cloud Edition 
+#+DATE: [2016-09-14 Wed]
+#+PROPERTY: results output
+#+PROPERTY: exports code
+#+SETUPFILE: ./org-templates/level-0.org
+#+options: ^:nil
+#+LATEX: Literal LaTeX code for export
+
+
+* Introduction
+  This document contains the scripts for calculating Performance of
+  the College Cloud Edition
+* Scripts for testing College Cloud performance
+** Variable declaration
+   #+NAME: variables
+   #+BEGIN_SRC sh :tangle performance.sh :eval no :noweb yes
+#!/usr/bin/env bash
+SECONDS="10s"
+STATS_SECONDS="10"
+DELAY="sleep $SECONDS"
+PERFORMANCE_TEST="performance-test-results"
+#SPLIT_CC="split-cc"
+CC_VMSTAT="cc-vmstat" 
+CC_MPSTAT="cc-mpstat" 
+CC_PAGEFAULTS="pagefaults" 
+CC_SIEGE="cc-siege"
+VMSTAT="vmstat -n -w -S M 1 $STATS_SECONDS"
+MPSTAT="mpstat -P ALL 1 $STATS_SECONDS"
+SAR="sar -B 1 $STATS_SECONDS"
+RUN1_TXT="run1.txt"
+RUN2_TXT="run2.txt"
+RUN3_TXT="run3.txt"
+RUN4_TXT="run4.txt"
+RUN5_TXT="run5.txt"
+CONCURRENCY_RUN2="20"
+CONCURRENCY_RUN3="50"
+CONCURRENCY_RUN4="50"
+CONCURRENCY_RUN5="50"
+LAB_URL="http://cse01-iiith.vlabs.ac.in/"
+VLABS_URL="http://vlabs.ac.in/"
+SIEGE2="siege -c $CONCURRENCY_RUN2 -t $SECONDS"
+SIEGE3="siege -c $CONCURRENCY_RUN3 -t $SECONDS"
+SIEGE4="siege -c $CONCURRENCY_RUN4 -t $SECONDS"
+SIEGE5="siege -c $CONCURRENCY_RUN5 -t $SECONDS"
+   #+END_SRC
+** RUN1 
+   #+BEGIN_SRC sh :tangle performance.sh :eval no :noweb yes
+mkdir $PERFORMANCE_TEST
+dry()
+{
+
+$VMSTAT > $PERFORMANCE_TEST/$CC_VMSTAT-dry-$RUN1_TXT &
+$MPSTAT > $PERFORMANCE_TEST/$CC_MPSTAT-dry-$RUN1_TXT &
+$SAR > $PERFORMANCE_TEST/$CC_PAGEFAULTS-dry-$RUN1_TXT &
+$DELAY
+}
+   
+   #+END_SRC
+** RUN2 
+   #+BEGIN_SRC sh :tangle performance.sh :eval no :noweb yes
+run2() #Simple load on full version of the college cloud. That means, 20 concurrent user requests hitting one lab continuously for $SECONDS 
+{
+#sh run2.sh &
+$SIEGE2 $LAB_URL 2> $PERFORMANCE_TEST/$CC_SIEGE-$RUN2_TXT &
+$VMSTAT > $PERFORMANCE_TEST/$CC_VMSTAT-$RUN2_TXT &
+$MPSTAT > $PERFORMANCE_TEST/$CC_MPSTAT-$RUN2_TXT &
+$SAR > $PERFORMANCE_TEST/$CC_PAGEFAULTS-$RUN2_TXT &
+$DELAY
+}
+   
+   #+END_SRC
+** RUN3
+#+BEGIN_SRC sh :tangle performance.sh :eval no :noweb yes
+run3() #Simple load on full version of the college cloud. That means, 20 concurrent user requests hitting one lab continuously for $SECONDS 
+{
+#sh run3.sh
+$SIEGE3 $LAB_URL 2> $PERFORMANCE_TEST/$CC_SIEGE-$RUN3_TXT &
+$VMSTAT > $PERFORMANCE_TEST/$CC_VMSTAT-$RUN3_TXT &
+$MPSTAT > $PERFORMANCE_TEST/$CC_MPSTAT-$RUN3_TXT &
+$SAR > $PERFORMANCE_TEST/$CC_PAGEFAULTS-$RUN3_TXT &
+$DELAY
+}
+
+#+END_SRC
+** RUN 4
+#+BEGIN_SRC sh :tangle performance.sh :eval no :noweb yes
+run4()
+{
+#sh run4.sh
+$SIEGE4 $VLABS_URL 2> $PERFORMANCE_TEST/$CC_SIEGE-$RUN4_TXT &
+$VMSTAT > $PERFORMANCE_TEST/$CC_VMSTAT-$RUN4_TXT &
+$MPSTAT > $PERFORMANCE_TEST/$CC_MPSTAT-$RUN4_TXT &
+$SAR > $PERFORMANCE_TEST/$CC_PAGEFAULTS-$RUN4_TXT &
+$DELAY
+}
+
+#+END_SRC
+** RUN 5
+#+BEGIN_SRC sh :tangle performance.sh :eval no :noweb:yes
+run5()
+{
+#sh run5.sh
+$SIEGE5 $LAB_URL 2> $PERFORMANCE_TEST/$CC_SIEGE-$RUN5_TXT &
+$VMSTAT > $PERFORMANCE_TEST/$CC_VMSTAT-$RUN5_TXT &
+$MPSTAT > $PERFORMANCE_TEST/$CC_MPSTAT-$RUN5_TXT &
+$SAR > $PERFORMANCE_TEST/$CC_PAGEFAULTS-$RUN5_TXT &
+$DELAY
+}
+
+#+END_SRC
+** Call above functions
+   #+BEGIN_SRC sh :tangle performance.sh :eval no :noweb yes
+dry
+run2
+run3
+run4
+run5
+   
+   #+END_SRC
+
+
