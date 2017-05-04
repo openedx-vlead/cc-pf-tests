@@ -109,7 +109,7 @@ $DELAY
 
 #+END_SRC
 ** Call above functions
-   #+BEGIN_SRC sh :tangle performance.sh :eval no :noweb yes
+   #+BEGIN_SRC sh :tangle performance.sh :results output :noweb yes
 dry
 run2
 run3
@@ -117,5 +117,7 @@ run4
 run5
    
    #+END_SRC
+
+
 
 
