@@ -1,0 +1,65 @@
+#+TITLE: Working on kibana
+In this document we will see how kibama works and what are the basics things
+required in kibama for visualizing.
+* Introduction
+After successfully installing kibana.open "localhost:5601" in your webbrowser
+and login with the credentials while installing kibana.
+
+For staring kibana you need to create an index.You can see all the indices by
+following.
+#+BEGIN_EXAMPLE
+Go to settings->indices
+#+END_EXAMPLE
+which lists all the indices created till now.
+
+* Creating indices and inserting data to the indices
+For creating an index named vlead run the following command in your terminal.
+#+BEGIN_EXAMPLE
+curl -XPUT localhost:9200/vlead -d '{
+    "index" : {
+        "analysis" : {
+            "analyzer" : {
+                "default" : {
+                    "type" : "keyword"
+                }
+            }
+        }
+    }
+}'
+
+#+END_EXAMPLE
+ After succesfully running the above command go to kibama and enter the index
+ name (vlead) to create vlead named index in kibana.
+
+Now inserting data to the indices
+#+BEGIN_EXAMPLE
+CURL -PUT HTTP://LOCALHOST:9200/VLEAD/1 -D '
+{
+    "FIRST_NAME" : "KARTHIK",
+    "LAST_NAME" :  "SMITH",
+    "AGE" :        21,
+    "HEIGHT": 5.11,
+    "ABOUT" :      "I LOVE TO CODE",
+    "INTERESTS": [ "SPORTS", "MUSIC" ]
+}'
+#+END_EXAMPLE
+The above data will be inserted into the elasticsearch database which in turn
+is connected to kibana.The entered data can be seen in kibana
+#+BEGIN_EXAMPLE
+Go to discover and select the index you want to see its data.
+Now you can see the complete data in the specific index.
+#+END_EXAMPLE
+
+* Inserting data through json format to kibana
+ To insert the data from .json format.run the following command.
+#+BEGIN_EXAMPLE
+curl -XPOST localhost:9200/vlead/my_doc_type/_bulk --data-binary  @kibana.json
+#+END_EXAMPLE
+The above command posts the data from kibana.json to an index named vlead.
+* Visualizing the given data
+Now you can also visualize the given using kibama. 
+go to visualize and select the graph and then select the index you want to visualize. 
+There you can set the parameters on both axes.
+You can visualize using histogram,bargraph,piechart etc
+* Note 
+ Refresh the settings in setings/indices/

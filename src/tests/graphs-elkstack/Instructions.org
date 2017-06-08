@@ -1,0 +1,4 @@
+#+TITLE: Instructions for conversion of text file to json file
+ Place the sample.txt and code.py in the same directory and run code.py
+The output will be sample.json which will be palced in the above mentioned directory.
+
