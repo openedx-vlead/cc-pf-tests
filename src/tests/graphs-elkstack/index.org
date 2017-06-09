@@ -1,32 +1,28 @@
-#+TITLE: ELK Stack
-
-These documents help you to understand the functioning and uses of elk stack.
-
-
 #+TITLE: Documentation of the project
-
+* Introduction:-
+ This document explains about how to analyze the performance of a college clod
+ using elk stack.
 * Objective:-
- To analyse the performance of the college cloud.
+ To analyze the performance of the college cloud.
 
-* Requirements:
+* Requirements:-
  1)To analyse the performance of a college cloud we need an elk stack tool for
   visualizing the given logs of the college cloud.
 2)python script for converting text file to json file.
-* Introduction:-
+*  Procedure:-
+
 Virtual Labs College Cloud Edition is the Portable-Edition for Virtual Labs. It
  offers the offline version of Virtual labs, experiments and theoretical
  content. This edition addresses the lack of internet access or poor internet
  connectivity across different institutes/colleges.
  It results in a very cost-effective Learning Management System.
 ELK stack:
- The ELK Stack is a collection of three open-source products ‚Äî Elasticsearch,
- Logstash, and Kibana ‚Äî from Elastic. Elasticsearch is a NoSQL database that is
+ The ELK Stack is a collection of three open-source products Å\ Elasticsearch,
+ Logstash, and Kibana Å\ from Elastic. Elasticsearch is a NoSQL database that is
  based on the Lucene search engine. Logstash is a log pipeline tool that
  accepts inputs from various sources, executes different transformations, and
  exports the data to various targets.
  Kibana is a visualization layer that works on top of Elasticsearch.
-
-* Procedure:-
 
 1)We need to give log files to elasicsearch database which is connected to
 kibana. In kibana we can visualize the graphs of logs of college cloud.
@@ -38,6 +34,9 @@ input so we need to convert all text files to json format.
  the process in shown below .
 [[./chart.png]]
 
-
+* Observation:-
+The following are the images of visualizations  created using kibana dashboard
+[[./karthik.png]]
+[[./graph.png]]
 
  
