@@ -2,7 +2,7 @@
 
 * Introducion
 As the process is logstash will take syslogs from the system and puts it in the
-elastic search and kibama is connected to elasticsearch.As kibama cannot
+elastic search and kibama is connected to elasticsearch.As kibana cannot
 support text files or it can also extract data from .json files.So we need to
 converts logfiles which are in text format to json format.
 
