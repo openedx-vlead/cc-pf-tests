@@ -32,11 +32,11 @@ input so we need to convert all text files to json format.
 
 3) Conversion takes place using a python script.
  the process in shown below .
-[[./chart.png]]
+[[./images/chart.png]]
 
 * Observation:-
 The following are the images of visualizations  created using kibana dashboard
-[[./karthik.png]]
-[[./graph.png]]
+[[./images/karthik.png]]
+[[./images/graph.png]]
 
  
