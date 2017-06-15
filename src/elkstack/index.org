@@ -34,6 +34,7 @@ input so we need to convert all text files to json format.
 
 3) Conversion of logfiles to json format takes place in logstash as shown in design.
  Link for installing elksack:https://github.com/openedx-vlead/cc-pf-tests/blob/master/src/elkstack/scripts/elk_installer_container.org
+ Filter configuration :https://github.com/openedx-vlead/cc-pf-tests/blob/master/src/elkstack/scripts/json_encode.conf
 * Observation:-
 The following are the images of visualizations  created using kibana dashboard
 [[./images/karthik.png]]
