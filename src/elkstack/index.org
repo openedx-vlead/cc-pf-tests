@@ -10,7 +10,7 @@
   visualizing the given logs of the college cloud.
 * Design
  The design of the project is as follows.
- design(link)
+ [[https://github.com/openedx-vlead/cc-pf-tests/blob/master/src/elkstack/design/index.org][Design]]
 * Implementation:-
 
 Virtual Labs College Cloud Edition is the Portable-Edition for Virtual Labs. It
