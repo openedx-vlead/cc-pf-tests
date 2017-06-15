@@ -1,0 +1,10 @@
+#+TITLE: Design of the project
+* Introduction:-
+ This document explains about the design of project which is how to analyse the performance of a college cloud.
+
+* Objective:-
+ To analyze the performance of the college cloud.
+* Design
+ The design of the project is shown below.
+ [[./images/chart.png]]
+

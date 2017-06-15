@@ -1,0 +1,319 @@
+Table of Contents
+#+TITLE: Installation of elk stack in a container
+* Create a container in ubuntu 16.04
+ enter into base4 user by running the following command
+#+BEGIN_EXAMPLE
+ssh usr@ipdd
+#+END_EXAMPLE
+Enter the password when prompted.Do not forget to add user name and IP address.
+
+Enter into the super user
+#+BEGIN_EXAMPLE
+sudo su -
+#+END_EXAMPLE
+
+ Check for free IP by using ping command
+#+BEGIN_EXAMPLE
+ping ipadd
+#+END_EXAMPLE
+Check for free CTID by using vzctl list
+
+For creating a container with CTID as 15201 and ipaddress as 10.4.15.201
+   #+BEGIN_EXAMPLE
+   vzctl create CTID --ostemplate ubuntu-16.04-x86_64 --ipadd 10.4.15.201 --hostname Karthik-graphana
+   #+END_EXAMPLE
+   
+
+ 
+
+  Install java 8
+  Install Elasticsearch
+  Insatll kibama
+  Install logstash
+
+* Install java 8
+
+Elastic search and logstash require java. So we have to install java first. Add the oracle java PPA to apt:
+ #+BEGIN_EXAMPLE
+ sudo add-apt-repository -y ppa:webupd8team/java
+ #+END_EXAMPLE
+
+ update your apt package database:-
+#+BEGIN_EXAMPLE
+sudo apt-get update
+#+END_EXAMPLE
+
+
+Install the latest stable version of oracle java8:- 
+#+BEGIN_EXAMPLE
+sudo apt-get -y install oracle-java8-installer
+#+END_EXAMPLE
+
+* Install curl  
+Install curl by running  the following commands
+#+BEGIN_EXAMPLE
+sudo apt-get install curl
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+sudo apt-get update
+#+END_EXAMPLE
+* Install Elasticsearch
+
+ download the package by running the below command:-
+#+BEGIN_EXAMPLE
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+#+END_EXAMPLE
+
+
+ Enter the password when prompted.create the elasticsearch source list :-
+#+BEGIN_EXAMPLE
+echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list.
+
+#+END_EXAMPLE
+ 
+ update your apt package database:-
+#+BEGIN_EXAMPLE
+sudo apt-get update
+#+END_EXAMPLE 
+
+ Install elasticsearch with this command:-
+#+BEGIN_EXAMPLE
+sudo apt-get -y install elasticsearch
+#+END_EXAMPLE
+  
+
+Elasticsearch is now installed and you can check it by running the below command:-
+#+BEGIN_EXAMPLE
+sudo service elasticsearch status
+#+END_EXAMPLE
+
+
+After elasticsearch is installed.Let us edit the config file.Open the elasticsearch.yml using your favourite editor.
+ #+BEGIN_EXAMPLE
+ sudo vim /etc/elasticsearch/elasticsearch.yml
+ #+END_EXAMPLE
+
+
+For restricting outsiders for accessing your elasticsearch instance(port:9200).Find the line that specifies network.host uncomment the line and replace its value with localhost.
+#+BEGIN_EXAMPLE
+ network.host: "localhost"
+#+END_EXAMPLE
+
+save and exit elastic.yml.Start elasticsearch by the following command:-
+#+BEGIN_EXAMPLE
+sudo service elasticsearch restart
+#+END_EXAMPLE
+
+Then run the following command to start Elasticsearch on boot up:-
+#+BEGIN_EXAMPLE
+sudo update-rc.d elasticsearch defaults 95 10
+#+END_EXAMPLE
+
+* Install kibana
+
+kibana can be installed with a packet manager by adding Elastic's packagesource list.
+#+BEGIN_EXAMPLE
+echo "deb http://packages.elastic.co/kibana/4.4/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-4.4.x.listx
+#+END_EXAMPLE
+
+Update your apt package database:-
+#+BEGIN_EXAMPLE
+sudo apt-get update
+#+END_EXAMPLE
+
+Install Kibana with this command:-
+#+BEGIN_EXAMPLE
+sudo apt-get -y install kibana
+#+END_EXAMPLE
+  
+
+After installing kibana open the configuration file.
+#+BEGIN_EXAMPLE
+sudo vi /opt/kibana/config/kibana.yml
+#+END_EXAMPLE
+
+make the following changes.
+#+BEGIN_EXAMPLE
+server.host: "localhost"
+#+END_EXAMPLE
+Now enable kibana service and start it.
+#+BEGIN_EXAMPLE
+    sudo update-rc.d kibana defaults 96 9
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+sudo service kibana start
+#+END_EXAMPLE
+for starting kibana enter the following lines in your browser:
+#+BEGIN_EXAMPLE
+localhost:5601
+#+END_EXAMPLE
+this will start kibana 
+
+
+
+* Install nginx
+Because we configured Kibana to listen on localhost, we must set up a reverse
+ proxy to allow external access to it.
+ We will use Nginx for this purpose.
+
+Use apt to install Nginx:-
+#+BEGIN_EXAMPLE
+sudo apt-get install nginx 
+#+END_EXAMPLE
+Use htpasswd to create an admin user, called "karthikminupala" 
+#+BEGIN_EXAMPLE
+sudo htpasswd -c /etc/nginx/htpasswd.users karthikminupala
+#+END_EXAMPLE
+Enter a password at the prompt.Dont forget this password as it is used for
+logging in to access kibana web interface.
+
+Now open the Nginx default server block in your favorite editor. We will use
+vim:
+#+BEGIN_EXAMPLE
+sudo vi /etc/nginx/sites-available/default
+#+END_EXAMPLE
+Delete the files contents and paste the following code block into the file.
+Dont forget to update server_name:-
+#+BEGIN_EXAMPLE
+    server {
+        listen 80;
+
+        server_name example.com;
+
+        auth_basic "Restricted Access";
+        auth_basic_user_file /etc/nginx/htpasswd.users;
+
+        location / {
+            proxy_pass http://localhost:5601;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;        
+        }
+    }
+
+#+END_EXAMPLE
+Now restart Nginx to put our changes into effect:-
+#+BEGIN_EXAMPLE
+sudo service nginx restart
+#+END_EXAMPLE
+
+* Install logstash
+Logstash package is available from same repository as elasticsearch.
+ create the Logstash source list:
+#+BEGIN_EXAMPLE
+echo 'deb http://packages.elastic.co/logstash/2.2/debian stable main' | sudo tee /etc/apt/sources.list.d/logstash-2.2.x.list
+#+END_EXAMPLE
+Update your apt package database:-
+#+BEGIN_EXAMPLE
+sudo apt-get update
+#+END_EXAMPLE
+Install Logstash with this command:-
+#+BEGIN_EXAMPLE
+sudo apt-get install logstash
+#+END_EXAMPLE
+* Generate SSL Certificates
+Since we are going to use Filebeat to ship logs from our Client Servers to our
+ ELK Server, we need to create an SSL certificate and key pair
+#+BEGIN_EXAMPLE
+sudo mkdir -p /etc/pki/tls/certs
+sudo mkdir /etc/pki/tls/private
+#+END_EXAMPLE
+Generating SSL certificates using IP address
+#+BEGIN_EXAMPLE
+sudo vi /etc/ssl/openssl.cnf
+#+END_EXAMPLE
+Find the [ v3_ca ] section in the file, and add this line under it
+(substituting in the ELK Server's private IP address):
+#+BEGIN_EXAMPLE
+subjectAltName = IP: ELK_server_private_IP
+#+END_EXAMPLE
+Now generate the SSL certificate and private key in the appropriate locations
+(/etc/pki/tls/), with the following commands:
+#+BEGIN_EXAMPLE
+cd /etc/pki/tls
+sudo openssl req -config /etc/ssl/openssl.cnf -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout private/logstash-forwarder.key -out certs/logstash-forwarder.crt
+#+END_EXAMPLE
+ 
+*Configure logstash
+Logstash configuration files are in the JSON-format, and reside in /etc/logstash/conf.d. The configuration consists of three sections: inputs, filters, and outputs.
+
+Let's create a configuration file called 02-beats-input.conf and set up our
+"filebeat" input:-
+#+BEGIN_EXAMPLE
+sudo vim /etc/logstash/conf.d/02-beats-input.conf
+#+END_EXAMPLE
+
+insert the following lines of code in the above file
+#+BEGIN_EXAMPLE
+    input {
+      beats {
+        port => 5044
+        ssl => true
+        ssl_certificate => "/etc/pki/tls/certs/logstash-forwarder.crt"
+        ssl_key => "/etc/pki/tls/private/logstash-forwarder.key"
+      }
+    }
+
+#+END_EXAMPLE
+save and quit.
+
+Now let's create a configuration file called 10-syslog-filter.conf, 
+where we will add a filter for syslog messages:
+#+BEGIN_EXAMPLE
+sudo vim /etc/logstash/conf.d/10-syslog-filter.conf
+#+END_EXAMPLE
+Insert the following lines of code.
+#+BEGIN_EXAMPLE
+    filter {
+      if [type] == "syslog" {
+        grok {
+          match => { "message" => "%{SYSLOGTIMESTAMP:syslog_timestamp} %{SYSLOGHOST:syslog_hostname} %{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?: %{GREEDYDATA:syslog_message}" }
+          add_field => [ "received_at", "%{@timestamp}" ]
+          add_field => [ "received_from", "%{host}" ]
+        }
+        syslog_pri { }
+        date {
+          match => [ "syslog_timestamp", "MMM  d HH:mm:ss", "MMM dd HH:mm:ss" ]
+        }
+      }
+    }
+
+#+END_EXAMPLE
+save and quit.
+Lastly, we will create a configuration file called
+30-elasticsearch-output.conf:-
+#+BEGIN_EXAMPLE
+sudo vi /etc/logstash/conf.d/30-elasticsearch-output.conf
+#+END_EXAMPLE
+insert the output configuration:
+#+BEGIN_EXAMPLE
+    output {
+      elasticsearch {
+        hosts => ["localhost:9200"]
+        sniffing => true
+        manage_template => false
+        index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+        document_type => "%{[@metadata][type]}"
+      }
+    }
+
+#+END_EXAMPLE
+Save and exit. This output basically configures Logstash to store the beats
+data in Elasticsearch which is running at localhost:9200, in an index named
+after the beat used (filebeat, in our case).
+Test your Logstash configuration with this command:-
+#+BEGIN_EXAMPLE
+sudo service logstash configtest
+#+END_EXAMPLE
+It should display "configuration ok".
+Restart Logstash, and enable it, to put our configuration changes into effect:-
+#+BEGIN_EXAMPLE
+    sudo service logstash restart
+    sudo update-rc.d logstash defaults 96 9
+
+#+END_EXAMPLE
+
+Reference link: [[www.itzgeek.com/how-tos/linux/ubuntu-how-tos/setup-elk-stack-ubuntu-16-04.html]]
+Note:make sure that localhost should be same While configuring yaml files of elasticsearch and kibana.
