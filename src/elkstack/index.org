@@ -19,8 +19,8 @@ Virtual Labs College Cloud Edition is the Portable-Edition for Virtual Labs. It
  connectivity across different institutes/colleges.
  It results in a very cost-effective Learning Management System.
 ELK stack:
- The ELK Stack is a collection of three open-source products ― Elasticsearch,
- Logstash, and Kibana ― from Elastic. Elasticsearch is a NoSQL database that is
+ The ELK Stack is a collection of three open-source products ﾂ― Elasticsearch,
+ Logstash, and Kibana ﾂ― from Elastic. Elasticsearch is a NoSQL database that is
  based on the Lucene search engine. Logstash is a log pipeline tool that
  accepts inputs from various sources, executes different transformations, and
  exports the data to various targets.
@@ -36,7 +36,7 @@ input so we need to convert all text files to json format.
 
 * Observation:-
 The following are the images of visualizations  created using kibana dashboard
-[[./karthik.png]]
-[[./graph.png]]
+[[./images/karthik.png]]
+[[./images/graph.png]]
 
  
