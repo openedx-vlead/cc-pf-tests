@@ -19,13 +19,14 @@ Virtual Labs College Cloud Edition is the Portable-Edition for Virtual Labs. It
  connectivity across different institutes/colleges.
  It results in a very cost-effective Learning Management System.
 ELK stack:
- The ELK Stack is a collection of three open-source products \ Elasticsearch,
- Logstash, and Kibana \ from Elastic. Elasticsearch is a NoSQL database that is
+ The ELK Stack is a collection of three open-source products  Elasticsearch,
+ Logstash, and Kibana  from Elastic. Elasticsearch is a NoSQL database that is
  based on the Lucene search engine. Logstash is a log pipeline tool that
  accepts inputs from various sources, executes different transformations, and
  exports the data to various targets.
  Kibana is a visualization layer that works on top of Elasticsearch.
 For instaling elkstack [[https://github.com/openedx-vlead/cc-pf-tests/blob/master/src/elkstack/scripts/elk_installer_container.org][link]]
+
 1)We need to give log files to elasicsearch database which is connected to
 kibana. In kibana we can visualize the graphs of logs of college cloud.
 
@@ -34,8 +35,7 @@ input so we need to convert all text files to json format.
 
 3) Conversion of logfiles to json format takes place in logstash as shown in design.
  for installing elksack
- Filter configuration  [[https://github.com/openedx-vlead/cc-pf-tests/blob/master/src/elkstack/scripts/json_encode.conf
-* Observation][link]]
+ Filter configuration [[https://github.com/openedx-vlead/cc-pf-tests/blob/master/src/elkstack/scripts/json_encode.conf][link]]
 The following are the images of visualizations  created using kibana dashboard
 [[./images/karthik.png]]
 [[./images/graph.png]]
