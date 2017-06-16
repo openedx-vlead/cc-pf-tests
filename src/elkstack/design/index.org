@@ -6,5 +6,5 @@
  To analyze the performance of the college cloud.
 * Design
  The design of the project is shown below.
- [[./images/ELK.jpg]]
+ [[./images/elk.png]]
 
