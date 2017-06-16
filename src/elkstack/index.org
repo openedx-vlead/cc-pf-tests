@@ -13,5 +13,6 @@
 
 - [[./observations/index.org][Observation]]
 
-* Reference:-
-[[https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elk-stack-on-ubuntu-14-04][Refrence]]
+* References:-
+[[https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elk-stack-on-ubuntu-14-04][Refrence1]]
+[[http://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/setup-elk-stack-ubuntu-16-04.html][Refernce2]]
