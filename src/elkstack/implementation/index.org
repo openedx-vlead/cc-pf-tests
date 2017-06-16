@@ -9,7 +9,7 @@ kibana. In kibana we can visualize the graphs of logs of college cloud.
 2)All logfiles are in text format but elasticsearch takes only json files as
 input so we need to convert all text files to json format.
 
-3) Conversion of logfiles to json format takes place in logstash as shown in design.
+3) Configuring logstash by using a filter which allows logstash to take logs from syslogs and convert it to json format and give it to elasticsearch.
 
 for installing elkstack in ubuntu16.04:-
 Table of Contents
