@@ -12,7 +12,7 @@
 
 * Observation:-
 The following are the images of visualizations  created using kibana dashboard
-[[./karthik.png]]
-[[./graph.png]]
+[[./images/karthik.png]]
+[[./images/graph.png]]
 
  
