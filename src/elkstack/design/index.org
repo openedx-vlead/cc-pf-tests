@@ -1,10 +1,16 @@
-#+TITLE: Design of the project
-* Introduction:-
+#+TITLE: Design diagram
+#+Author: Systems Team
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
  This document explains about the design of project which is how to analyse the performance of a college cloud.
 
-* Objective:-
+* Objective
  To analyze the performance of the college cloud.
 * Design
  The design of the project is shown below.
- [[./images/elk.png]]
+ [[../images/elk.jpg][Image]]
 
