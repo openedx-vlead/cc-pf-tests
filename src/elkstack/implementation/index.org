@@ -1,5 +1,11 @@
-#+TITLE: IMpementation of the project
-* Introduction:-
+#+TITLE: Implementation 
+#+Author: Systems Team
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
  This document explains about the implementation of project which is how to analyse the performance of a college cloud.
 
 
@@ -13,7 +19,6 @@ input so we need to convert all text files to json format.
 
 for installing elkstack in ubuntu16.04:-
 Table of Contents
-#+TITLE: Installation of elk stack in a container
 * Create a container in ubuntu 16.04
  enter into base4 user by running the following command
 #+BEGIN_EXAMPLE

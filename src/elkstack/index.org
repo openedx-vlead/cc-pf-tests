@@ -1,18 +1,24 @@
-#+TITLE: Documentation of the project
-* Introduction:-
+#+TITLE: Visualization of College Cloud performance results
+#+Author: Systems Team
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+
+* Introduction
  This document explains about how to analyze the performance of a college cloud
  using elk stack.
-* Objective:-
+* Objective
  To analyze the performance of the college cloud.
 
-* Requirements:-
- - [[./requirements/index.org][Requirements]]
-* Implementation:-
+* Requirements
+  - [[./requirements/index.org][Requirements]]
+* Implementation
   - [[./implementation/index.org][Implementation]]
-* Observation:-
+* Observation
+  - [[./observations/index.org][Observation]]
 
-- [[./observations/index.org][Observation]]
-
-* References:-
-[[https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elk-stack-on-ubuntu-14-04][Refrence1]]
-[[http://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/setup-elk-stack-ubuntu-16-04.html][Refernce2]]
+* References
+  - [[https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elk-stack-on-ubuntu-14-04][Refrence1]]
+  - [[http://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/setup-elk-stack-ubuntu-16-04.html][Refernce2]]

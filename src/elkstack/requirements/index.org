@@ -1,7 +1,15 @@
-#+TITLE:Requirements for testing the performance of the college cloud
-* Introduction:-
+#+TITLE: Requirements 
+#+Author: Systems Team
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
  This document explains about the requirements of the project is how to analyse
  the performance of a college cloud.
   
-1)To analyse the performance of a college cloud we need an elk stack tool for
-  visualizing the given logs of the college cloud.
+* Requirements
+  - Visualize the Systems resources ( RAM, CPUs, Context Switches) of
+    College Cloud performance.
+
