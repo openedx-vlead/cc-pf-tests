@@ -1,0 +1,13 @@
+#+TITLE: Observationsof the project
+#+Author: Systems Team
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+
+* Introduction
+ This document explains about the observation of project which is how to analyse the performance of a college cloud.
+  we can analyse the performance of the system like how many processes are waiting to enter the processor.
+- [[./images/run.png]]
+- [[./images/cpu.png]]

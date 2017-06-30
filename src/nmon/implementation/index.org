@@ -1,0 +1,84 @@
+#+TITLE: Analyzing performance using nmon tool
+* Introduction:-
+ This document explains about the implementation of nmon  which is how to analyse the performance of a system.
+Installing nmon.
+#+BEGIN_EXAMPLE
+sudo apt-get install nmon
+#+END_EXAMPLE
+
+To start the nmon.Run the following command
+#+BEGIN_EXAMPLE
+nmon
+#+END_EXAMPLE
+
+Start nmon by using the following command.
+#+BEGIN_EXAMPLE
+nmon
+#+END_EXAMPLE
+
+For help run the following command.
+#+BEGIN_EXAMPLE
+nmon -h
+#+END_EXAMPLE
+
+How to capture the data to a file for later analysis and graphing.
+Run nmon with the -f flag. See nmon -h for the details. But as an example,
+ try to run nmon for an hour capturing data snapshots every 30 seconds by
+using: ABC
+#+BEGIN_EXAMPLE
+nmon -f -s 30 -c 120
+nmon -fT -s 30 -c 120
+#+END_EXAMPLE
+
+The second line also captures the top processes. Both of these create the
+output file in the current directory called: ABC
+#+BEGIN_EXAMPLE
+<hostname>_date_time.nmon
+#+END_EXAMPLE
+
+This file is in a comma-separated values (CSV) format and can be imported into
+a spreadsheet directly.sample.csv will be created in the same directory.
+#+BEGIN_EXAMPLE
+sort  mymachine_311201_1030.nmon > sample.csv
+#+END_EXAMPLE.
+
+
+webpage graphs from nmon data.
+We already have data so we need to generate graphs using the obtained data.
+For generating web graphs we use nmonchart which is to be installed.
+
+Installing nmonchart
+#+BEGIN_EXAMPLE
+sudo apt-get install nmonchart
+#+END_EXAMPLE
+  
+Another method of installation of nmonchart
+#+BEGIN_EXAMPLE
+wget http://sourceforge.net/projects/nmon/files/nmonchart31.tar
+tar xvf nmonchart31.tar
+#+END_EXAMPLE
+
+After succesfully installing nmonchart we need to generate .html file from
+given data using nmonchart.
+#+BEGIN_EXAMPLE
+nmonchart <nmon-file> <output-file>.html
+#+END_EXAMPLE
+For example
+   nmonchart blue_150508_0800.nmon blue_150508_0800.html 
+
+Open the .html file using your favourite browser and you can see graphs generated.
+If you does not need some graphs you can remove by making changes in .html file.
+
+* Collection of logs automatically using crontab
+  For collecting logs added the following in /etc/crontab
+#+BEGIN_EXAMPLE
+ 0,10,20,30,40,50 * * * * nmon -f -s 20 -c 30
+#+END_EXAMPLE
+ which creates .nmon for every 10 minutes which stores logs of 10 minutes.
+
+Now convert .nmon file to .htmlfile using
+#+BEGIN_EXAMPLE
+nmonchart <nmon-file> <output-file>.html
+#+END_EXAMPLE
+
+

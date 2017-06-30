@@ -1,0 +1,7 @@
+#+TITLE:Requirements for testing the performance of the college cloud
+* Introduction:-
+ This document explains about the requirements of the project is how to analyse
+ the performance of a college cloud.
+  
+1)To analyse the performance of a system we need an nmon tool for
+  visualizing the logs of the college cloud.

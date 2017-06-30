@@ -1,0 +1,26 @@
+#+TITLE: Visualization of system Performance results
+#+Author: Systems Team
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+
+* Introduction
+ This document explains about how to analyze the performance of a system
+ using nmon.
+* Objective
+ To analyze the performance of the system.
+
+* Requirements
+  - [[./requirements/index.org][Requirements]]
+* Design
+  - [[./design/index.org][Design diagram]]
+* Implementation
+  - [[./implementation/index.org][Implementation]]
+* Observation
+  - [[./observation/index.org][Observation]]
+
+* References
+  - [[http://nmon.sourceforge.net/pmwiki.php][Refrence1]]
+  - [[https://www.ibm.com/support/knowledgecenter/en/ssw_aix_61/com.ibm.aix.cmds4/nmon.htm][Refernce2]]
