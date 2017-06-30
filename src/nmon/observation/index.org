@@ -1,4 +1,4 @@
-#+TITLE: Observationsof the project
+#+TITLE: Observations of the project
 #+Author: Systems Team
 #+SETUPFILE: ../../org-templates/level-2.org
 #+TAGS: boilerplate(b)
