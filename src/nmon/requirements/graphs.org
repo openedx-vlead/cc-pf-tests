@@ -1,0 +1,29 @@
+Grpahs
+* CPU Utilisation percentages 
+It explains about the utilisation of cpu at a particular time.
+Idle%:Percentage of time that the CPU or CPUs were idle and the system did not
+have an outstanding disk I/O request.  %system: Percentage of CPU utilization
+that occurred while executing at the system level (kernel).  %user: Percentage
+of CPU utilization that occurred while executing at the user level
+(application).
+* CPU usage
+It explains about Use of Logical CPU Core Threads.
+
+* Run Queue
+It explains about the number of processes ready to run.
+ 
+* pSwitch
+ Number of process switches per second-between processes
+* ForkExec
+Fork() and Exec() System Calls per second - creating processes
+* Memory 
+It explains the real memory-ram in mb.
+Active memory is memory that is being used by a particular process.
+Inactive memory is memory that was allocated to a process that is no longer running. 
+
+* swap
+Virtual Memory - Paging Space in mb.
+
+* Network
+  
+Network Receive(read) & Send(write shown negatively) in KB per second
