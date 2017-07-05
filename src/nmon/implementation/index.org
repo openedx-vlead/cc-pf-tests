@@ -2,6 +2,13 @@
 * Introduction:-
  This document explains about the implementation of nmon  which is how to analyse the performance of a system.
 Installing nmon.
+
+* Requirements:-
+ We need to collect the logs of the system and should be able to visualize the
+ logs.
+
+* Implementataion:-
+
 #+BEGIN_EXAMPLE
 sudo apt-get install nmon
 #+END_EXAMPLE
@@ -69,9 +76,6 @@ For example
 Open the .html file using your favourite browser and you can see graphs generated.
 If you does not need some graphs you can remove by making changes in .html file.
 
-* Requirements:-
- We need to collect the logs of the system and should be able to visualize the
- logs.
 * Automation of collection of logs using crontab and shell script
 For collecting logs of the system for every minute and storing them in a
 specific directory.
