@@ -69,16 +69,25 @@ For example
 Open the .html file using your favourite browser and you can see graphs generated.
 If you does not need some graphs you can remove by making changes in .html file.
 
-* Collection of logs automatically using crontab
-  For collecting logs added the following in /etc/crontab
+* Requirements:-
+ We need to collect the logs of the system and should be able to visualize the
+ logs.
+* Automation of collection of logs using crontab and shell script
+For collecting logs of the system for every minute and storing them in a
+specific directory.
 #+BEGIN_EXAMPLE
- 0,10,20,30,40,50 * * * * nmon -f -s 20 -c 30
+/usr/bin/nmon -c 10 -s 6 -F ~/nmon/file-$(date +'%Y-%m-%d:%H:%M').nmon
 #+END_EXAMPLE
- which creates .nmon for every 10 minutes which stores logs of 10 minutes.
-
-Now convert .nmon file to .htmlfile using
+Now after getting  the logs in .nmon files, For visualization we need to convert the
+.nmon files into .html format.
+For conversion to html format i have written a shellscript file which takes
+nmon files as input and convert them into html format.
 #+BEGIN_EXAMPLE
-./nmonchart <nmon-file> <output-file>.html
-#+END_EXAMPLE
-
-
+/usr/bin/nmon -c 10 -s 6 -F ~/nmon/file-$(date +'%Y-%m-%d:%H:%M').nmon
+for file in ~/nmon/*.nmon
+do
+cd ~/nmon/
+./nmonchart  $file $file.html
+done
+#+END_EXAMPLE 
+add the above script to a file(sample.sh) and place it in ~/nmon directory.
