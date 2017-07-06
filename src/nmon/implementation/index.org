@@ -94,7 +94,7 @@ specific directory with a specific name.
 /usr/bin/nmon -c 10 -s 6 -F ~/nmon/file-$(date +'%Y-%m-%d:%H:%M').nmon
 #+END_EXAMPLE
 
-Add the above script in a file named nmon.sh and place it in ~/nmon directory.
+the above script in a file named nmon.sh and place it in ~/nmon directory.
 Now we will convert nmon file into html after its complete execution time(here
 it is 10*6=60s.)
 Now after getting  the logs in .nmon files, For visualization we need to convert the
