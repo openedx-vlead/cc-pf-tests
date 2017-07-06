@@ -14,54 +14,67 @@ analyze the performance of a system.
 sudo apt-get install nmon
 #+END_EXAMPLE
 
+** Starting with nmon
 To start the nmon.Run the following command
 #+BEGIN_EXAMPLE
 nmon
 #+END_EXAMPLE
-
 
 For help run the following command.
 #+BEGIN_EXAMPLE
 nmon -h
 #+END_EXAMPLE
 
-How to capture the data to a file for later analysis and graphing.
-Run nmon with the -f flag. See nmon -h for the details. But as an example,
- try to run nmon for an hour capturing data snapshots every 30 seconds by
-using: ABC
+** Capturing the data
+
+How to capture the data to a file for later analysis and graphing.  Run nmon
+with the -f flag which stores data in a file.The name of the file generated
+will be in the format of <hostname>_date_time.nmon.The file will be placed in
+the present working directory.  Let us try to run the following command which
+captures data for every 30 seconds for 120 times.
+
 #+BEGIN_EXAMPLE
 nmon -f -s 30 -c 120
-nmon -fT -s 30 -c 120
 #+END_EXAMPLE
 
-The second line also captures the top processes. Both of these create the
-output file in the current directory called: ABC
+-s <seconds> Time interval between refreshing the screen.(30 seconds in above example)
+-c <count> Number of times the screen must be refreshed.(120 times in above example)
+
+So the above command runs for 30*120=3600 seconds.
+
+** Storing nmon file in a specific directory with a specific name.
+ In the above example nmon files are stored in pwd with some name.But what if
+ we want to store the nmon in a specific directory with a specific name.For
+ that we are using -F flag in nmon command
 #+BEGIN_EXAMPLE
-<hostname>_date_time.nmon
+nmon -F ~/nmon/virat.nmon -c 120 -s 30
 #+END_EXAMPLE
+After running the above command you can see a file named virat.nmon in ~/nmon
+directory.It also runs for one hour(120*30sec).
+
+** sorting nmon to csv
 
 This file is in a comma-separated values (CSV) format and can be imported into
 a spreadsheet directly.sample.csv will be created in the same directory.
+
 #+BEGIN_EXAMPLE
 sort  mymachine_311201_1030.nmon > sample.csv
 #+END_EXAMPLE.
 
-
+** nmonchart
 webpage graphs from nmon data.
 We already have data so we need to generate graphs using the obtained data.
 For generating web graphs we use nmonchart which is to be installed.
 
-Installing nmonchart
-#+BEGIN_EXAMPLE
-sudo apt-get install nmonchart
-#+END_EXAMPLE
+** Installing nmonchart
   
-Another method of installation of nmonchart
+Method of installating nmonchart.
+
 #+BEGIN_EXAMPLE
 wget http://sourceforge.net/projects/nmon/files/nmonchart31.tar
 tar xvf nmonchart31.tar
 #+END_EXAMPLE
-
+** Working with nmonchart
 After succesfully installing nmonchart we need to generate .html file from
 given data using nmonchart.
 #+BEGIN_EXAMPLE
@@ -72,6 +85,10 @@ For example
 
 Open the .html file using your favourite browser and you can see graphs generated.
 If you does not need some graphs you can remove by making changes in .html file.
+
+
+
+
 
 * Automation of collection of logs using crontab and shell script
 For collecting logs of the system for every minute and storing them in a
