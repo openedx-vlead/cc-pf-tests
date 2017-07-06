@@ -1,7 +1,7 @@
 #+TITLE: Analyzing performance using nmon tool
 * Introduction:-
- This document explains about the implementation of nmon  which is how to analyse the performance of a system.
-Installing nmon.
+  This document explains about the implementation of nmon which is how to
+analyze the performance of a system.
 
 * Requirements:-
  We need to collect the logs of the system and should be able to visualize the
@@ -9,6 +9,7 @@ Installing nmon.
 
 * Implementataion:-
 
+** Installing nmon
 #+BEGIN_EXAMPLE
 sudo apt-get install nmon
 #+END_EXAMPLE
@@ -18,10 +19,6 @@ To start the nmon.Run the following command
 nmon
 #+END_EXAMPLE
 
-Start nmon by using the following command.
-#+BEGIN_EXAMPLE
-nmon
-#+END_EXAMPLE
 
 For help run the following command.
 #+BEGIN_EXAMPLE
