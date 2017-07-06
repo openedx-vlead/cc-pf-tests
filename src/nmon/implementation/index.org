@@ -37,8 +37,8 @@ captures data for every 30 seconds for 120 times.
 nmon -f -s 30 -c 120
 #+END_EXAMPLE
 
--s <seconds> Time interval between refreshing the screen.(30 seconds in above example)
--c <count> Number of times the screen must be refreshed.(120 times in above example)
+- -s <seconds> Time interval between refreshing the screen.(30 seconds in above example)
+- -c <count> Number of times the screen must be refreshed.(120 times in above example)
 
 So the above command runs for 30*120=3600 seconds.
 
