@@ -12,3 +12,11 @@
   
 - [[./images/run.png][run]]
 - [[./images/cpu.png][cpu]]
+
+5:54-6:54 :-(file:///home/karthik/nmon/kar-2017-07-06:18:54.html)
+7:15-8:15:(file:///home/karthik/nmon/kar-2017-07-06:20:15.html)
+8:15-9:15;(_/file:///home/karthik/nmon/kar-2017-07-06:21:15.html/)
+9:15-10:15(file:///home/karthik/nmon/kar-2017-07-06:22:15.html)
+
+9:28-10:28 (file:///home/karthik/nmon/kar-2017-07-06:22:28.html)
+10:28-11:28(file:///home/karthik/nmon/kar-2017-07-06:23:28.html)
