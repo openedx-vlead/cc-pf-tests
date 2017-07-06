@@ -8,8 +8,8 @@ analyze the performance of a system.
  logs.
 
 * Implementataion:-
-
 ** Installing nmon
+   You can install nmon by using apt-get
 #+BEGIN_EXAMPLE
 sudo apt-get install nmon
 #+END_EXAMPLE
@@ -43,7 +43,7 @@ nmon -f -s 30 -c 120
 So the above command runs for 30*120=3600 seconds.
 
 ** Storing nmon file in a specific directory with a specific name.
- In the above example nmon files are stored in pwd with some name.But what if
+ In the above example nmon files are stored in present working directory with some name.But what if
  we want to store the nmon in a specific directory with a specific name.For
  that we are using -F flag in nmon command
 #+BEGIN_EXAMPLE
@@ -62,9 +62,9 @@ sort  mymachine_311201_1030.nmon > sample.csv
 #+END_EXAMPLE.
 
 ** nmonchart
-webpage graphs from nmon data.
+How to obtain webpage graphs from nmon data.
 We already have data so we need to generate graphs using the obtained data.
-For generating web graphs we use nmonchart which is to be installed.
+For generating web graphs we use a tool named nmonchart which is to be installed.
 
 ** Installing nmonchart
   
@@ -78,10 +78,12 @@ tar xvf nmonchart31.tar
 After succesfully installing nmonchart we need to generate .html file from
 given data using nmonchart.
 #+BEGIN_EXAMPLE
-nmonchart <nmon-file> <output-file>.html
+ ./nmonchart <nmon-file> <output-file-name>.html
 #+END_EXAMPLE
 For example
-   nmonchart blue_150508_0800.nmon blue_150508_0800.html 
+#+BEGIN_EXAMPLE
+  ./ nmonchart blue_150508_0800.nmon blue_150508_0800.html 
+#+END_EXAMPLE
 
 Open the .html file using your favourite browser and you can see graphs generated.
 If you does not need some graphs you can remove by making changes in .html file.
@@ -89,19 +91,24 @@ If you does not need some graphs you can remove by making changes in .html file.
 
 
 
-
-* Automation of collection of logs using crontab and shell script
+* Automation of collection and visualization of logs using crontab and shell script
 For collecting logs of the system for every minute and storing them in a
-specific directory.
+specific directory with a specific name.
+
 #+BEGIN_EXAMPLE
 /usr/bin/nmon -c 10 -s 6 -F ~/nmon/file-$(date +'%Y-%m-%d:%H:%M').nmon
 #+END_EXAMPLE
+
+Add the above script in a file named nmon.sh and place it in ~/nmon directory.
+Now we will convert nmon file into html after its complete execution time(here
+it is 10*6=60s.)
 Now after getting  the logs in .nmon files, For visualization we need to convert the
 .nmon files into .html format.
-For conversion to html format i have written a shellscript file which takes
+
+For conversion to html format we have written a shellscript file which takes
 nmon files as input and convert them into html format.
+
 #+BEGIN_EXAMPLE
-/usr/bin/nmon -c 10 -s 6 -F ~/nmon/file-$(date +'%Y-%m-%d:%H:%M').nmon
 for file in ~/nmon/*.nmon
 do
 cd ~/nmon/
@@ -109,3 +116,37 @@ cd ~/nmon/
 done
 #+END_EXAMPLE 
 add the above script to a file(sample.sh) and place it in ~/nmon directory.
+
+Now  for making some changes in the html files use the following script.
+#+BEGIN_EXAMPLE
+for test in ~/nmon/file*.html
+do
+sed '1410,1418d' $test > kar-$(date +'%Y-%m-%d:%H:%M').html
+rm -rf $test
+done
+#+END_EXAMPLE
+it does the required changes in the html files and place them in the ~/nmon
+directory.
+For visualizing logs at different time with a single click,link all the html
+files to a single html file(output.html) which means when we open output.html we
+can visualize other logs also.For that we have added the following script.
+#+BEGIN_EXAMPLE
+for file in ~/nmon/kar*.html
+do
+sed -i '1i/<html> <a href="'$file'" target="_blank"> '$file' </a><html> <br>' ~/nmon/sample.html
+echo "entered in to loop"
+done
+#+END_EXAMPLE
+open crontab using
+#+BEGIN_EXAMPLE
+crontab -e
+#+END_EXAMPLE
+add the following script in crontab
+#+BEGIN_EXAMPLE
+0 11 * * * sh ~/nmon/nmon.sh
+0 16 * * * sh ~/nmon/sample.sh
+1 16 * * * sh ~/nmon/test.sh
+#+END_EXAMPLE
+nmon runs at 11am daily for 5 hours.
+
+
