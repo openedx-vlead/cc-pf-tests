@@ -6,8 +6,8 @@ analyze the performance of a system.
 * Requirements:-
  We need to collect the logs of the system and should be able to visualize the
  logs.
-
-* Implementataion:-
+ 
+* Implementation:-
 ** Installing nmon
    You can install nmon by using apt-get
 #+BEGIN_EXAMPLE
@@ -42,7 +42,7 @@ nmon -f -s 30 -c 120
 
 So the above command runs for 30*120=3600 seconds.
 
-** Storing nmon file in a specific directory with a specific name.
+** Storing nmon file in a specific directory with a specific name
  In the above example nmon files are stored in present working directory with some name.But what if
  we want to store the nmon in a specific directory with a specific name.For
  that we are using -F flag in nmon command
@@ -50,8 +50,7 @@ So the above command runs for 30*120=3600 seconds.
 nmon -F ~/nmon/virat.nmon -c 120 -s 30
 #+END_EXAMPLE
 After running the above command you can see a file named virat.nmon in ~/nmon
-directory.It also runs for one hour(120*30sec).
-
+directory.It also runs for one hour(120*30sec)
 ** sorting nmon to csv
 
 This file is in a comma-separated values (CSV) format and can be imported into
@@ -87,9 +86,6 @@ For example
 
 Open the .html file using your favourite browser and you can see graphs generated.
 If you does not need some graphs you can remove by making changes in .html file.
-
-
-
 
 * Automation of collection and visualization of logs using crontab and shell script
 For collecting logs of the system for every minute and storing them in a
@@ -149,4 +145,18 @@ add the following script in crontab
 #+END_EXAMPLE
 nmon runs at 11am daily for 5 hours.
 
+Removing logs before 3 days. For removing logs we are deleting .nmon files from
+the ~/nmon directory.
+#+BEGIN_EXAMPLE
+test=$(date +%Y-%m-%d -d "3 day ago")
+echo "$test"
+for sam in ~/nmon/kart/file-$test*.nmon
+do       
+rm -rf $sam
+echo "removed $sam"
+done
+#+END_EXAMPLE
+Add the above script to a file called test.sh.
 
+Note:We can also combine the scripts of test.sh,sample.sh and place them in a
+single shell script file.
