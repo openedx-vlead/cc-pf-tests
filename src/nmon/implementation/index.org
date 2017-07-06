@@ -83,8 +83,7 @@ For example
 #+BEGIN_EXAMPLE
   ./ nmonchart blue_150508_0800.nmon blue_150508_0800.html 
 #+END_EXAMPLE
-
-Open the .html file using your favourite browser and you can see graphs generated.
+the .html file using your favourite browser and you can see graphs generated.
 If you does not need some graphs you can remove by making changes in .html file.
 
 * Automation of collection and visualization of logs using crontab and shell script
