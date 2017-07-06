@@ -26,7 +26,6 @@
 #do
 #./nmonchart $file $file.html
 #don
-#e
 #/usr/bin/nmon -c 10 -s 6 -F ~/nmon/file-$(date +'%Y-%m-%d:%H:%M').nmon
 #/usr/bin/nmon -c 30 -s 20 -F ~/nmon/file-$(date +'%Y-%m-%d:%H:%M').nmon
 
